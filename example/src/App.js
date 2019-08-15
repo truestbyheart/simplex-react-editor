@@ -1,13 +1,26 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
-import ExampleComponent from 'simple-react-editor'
+import SimplexEditor from 'simple-react-editor';
 
 export default class App extends Component {
-  render () {
+  constructor() {
+    super();
+    this.state = {
+      body: {}
+    };
+  }
+
+  getBodyContent = value => {
+    this.setState({ body: value });
+  };
+
+  render() {
+    console.log(this.state);
     return (
-      <div>
-        <ExampleComponent text='Modern React component module' />
+      <div className='container'>
+        <label htmlFor='editor'>Simplex Editor</label>
+        <SimplexEditor getArticle={this.getBodyContent} />
       </div>
-    )
+    );
   }
 }
