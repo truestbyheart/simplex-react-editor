@@ -12,15 +12,19 @@ const Image = ({ src }) => {
           id={`image-${imageIdIncremental++}`}
           onClick={e => captioner(e)}
         />
-        <input type='text' value='image caption' disabled />
+        <input type='text' value='image caption' id={imageIdIncremental} readOnly='true' />
       </div>
     )
   }
   return null
 }
 
-const captioner = (e) => {
-  console.log(e)
+const captioner = e => {
+  console.log(e.target.nextSibling.id)
+  const inputId = e.target.nextSibling.id
+  const inputField = document.getElementById(inputId)
+  inputField.readOnly = false
+  inputField.focus()
 }
 
 const Media = props => {
