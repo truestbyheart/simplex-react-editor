@@ -1,33 +1,49 @@
-import React from 'react';
+import React from 'react'
 
+let imageIdIncremental = 0
 const Image = ({ src }) => {
   if (src) {
-    return <img src={src} alt="jpg" />;
+    return (
+      <div className='captioned-image'>
+        <img
+          className='captioned-img'
+          src={src}
+          alt='jpg'
+          id={`image-${imageIdIncremental++}`}
+          onClick={e => captioner(e)}
+        />
+        <input type='text' value='image caption' disabled />
+      </div>
+    )
   }
-  return null;
-};
+  return null
+}
 
-const Media = (props) => {
-  const entity = props.contentState.getEntity(props.block.getEntityAt(0));
-  const { src } = entity.getData();
-  const type = entity.getType();
+const captioner = (e) => {
+  console.log(e)
+}
 
-  let media;
+const Media = props => {
+  const entity = props.contentState.getEntity(props.block.getEntityAt(0))
+  const { src } = entity.getData()
+  const type = entity.getType()
+
+  let media
 
   if (type === 'image') {
-    media = <Image src={src} />;
+    media = <Image src={src} />
   }
 
-  return media;
-};
+  return media
+}
 
-export default (block) => {
+export default block => {
   if (block.getType() === 'atomic') {
     return {
       component: Media,
       editable: false
-    };
+    }
   }
 
-  return null;
-};
+  return null
+}

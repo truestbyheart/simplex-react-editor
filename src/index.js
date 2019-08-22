@@ -3,16 +3,12 @@ import Draft, { EditorState, RichUtils, AtomicBlockUtils } from 'draft-js'
 import Editor from 'draft-js-plugins-editor'
 import { stateToHTML } from 'draft-js-export-html'
 import CodeUtils from 'draft-js-code'
-import PropTypes from 'prop-types'
+import propTypes from 'prop-types'
 import mediaBlockRenderer from './Entity/mediaBlockEntity'
 import Toolbar from './Toolbar'
 import imageUpload from './Image-upload/image-upload'
-import './styles.css'
 
 class SimplexEditor extends React.Component {
-  static PropTypes ={
-    getArticle: PropTypes.func.isRequired
-  }
   constructor(props) {
     super(props)
     this.state = { editorState: EditorState.createEmpty() }
@@ -39,13 +35,13 @@ class SimplexEditor extends React.Component {
 
   onURLChange = e => this.setState({ urlValue: e.target.value });
 
-  onAddImage = imageUrl => {
+  onAddImage = () => {
     const { editorState } = this.state
     const contentState = editorState.getCurrentContent()
     const contentStateWithEntity = contentState.createEntity(
       'image',
       'IMMUTABLE',
-      { src: imageUrl }
+      { src: 'https://res.cloudinary.com/dkqqm2qwn/image/upload/v1566495119/21248214_1978792145686156_8115030197051934811_o_ucen3d.jpg' }
     )
     const entityKey = contentStateWithEntity.getLastCreatedEntityKey()
     console.log(entityKey)
@@ -105,10 +101,13 @@ class SimplexEditor extends React.Component {
   };
 
   imageUrlGet = e => {
-    imageUpload(e).then(res => {
-      this.onAddImage(res)
-    })
+  //  imageUpload(e).then(res => {
+    this.onAddImage(res)
+    // })
   };
+  componentDidMount() {
+    this.onAddImage()
+  }
 
   handleKeyCommand = command => {
     const { editorState } = this.state
@@ -157,7 +156,6 @@ class SimplexEditor extends React.Component {
   };
 
   render() {
-    console.log(this.props)
     const { editorState } = this.state
     return (
       <div>
@@ -186,6 +184,10 @@ class SimplexEditor extends React.Component {
       </div>
     )
   }
+}
+
+SimplexEditor.propTypes = {
+  getArticle: propTypes.func.isRequired
 }
 
 export default SimplexEditor

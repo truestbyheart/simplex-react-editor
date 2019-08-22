@@ -17,4 +17,4 @@ export default [
     style: 'UNDERLINE',
     icon: 'fas fa-underline'
   }
-];
+]
