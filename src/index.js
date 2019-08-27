@@ -1,21 +1,31 @@
 import React from 'react'
-import Draft, { EditorState, RichUtils, AtomicBlockUtils } from 'draft-js'
+import Draft, { EditorState, RichUtils, AtomicBlockUtils, ContentState } from 'draft-js'
 import Editor from 'draft-js-plugins-editor'
 import { stateToHTML } from 'draft-js-export-html'
 import CodeUtils from 'draft-js-code'
-import PropTypes from 'prop-types'
+import propTypes from 'prop-types'
 import mediaBlockRenderer from './Entity/mediaBlockEntity'
 import Toolbar from './Toolbar'
 import imageUpload from './Image-upload/image-upload'
+import htmlToDraft from 'html-to-draftjs'
 import './styles.css'
 
 class SimplexEditor extends React.Component {
-  static PropTypes ={
-    getArticle: PropTypes.func.isRequired
-  }
   constructor(props) {
-    super(props)
-    this.state = { editorState: EditorState.createEmpty() }
+    super()
+    this.state = {
+      editorState: null
+    }
+    const { content } = props
+    if (content) {
+      const blockFromHtml = htmlToDraft(content)
+      const { contentBlocks, entintyMap } = blockFromHtml
+      const contentState = ContentState.createFromBlockArray(contentBlocks, entintyMap)
+      const initialContent = EditorState.createWithContent(contentState)
+      this.state = { editorState: initialContent }
+    } else {
+      this.state = { editorState: EditorState.createEmpty() }
+    }
   }
 
   onChange = editorState => {
@@ -157,7 +167,6 @@ class SimplexEditor extends React.Component {
   };
 
   render() {
-    console.log(this.props)
     const { editorState } = this.state
     return (
       <div>
@@ -186,6 +195,11 @@ class SimplexEditor extends React.Component {
       </div>
     )
   }
+}
+
+SimplexEditor.propTypes = {
+  getArticle: propTypes.func.isRequired,
+  content: propTypes.string
 }
 
 export default SimplexEditor

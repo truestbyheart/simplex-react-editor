@@ -6,6 +6,6 @@ const HEADER_TYPES = [
   { id: 5, label: 'H4', style: 'header-four' },
   { id: 6, label: 'H5', style: 'header-five' },
   { id: 7, label: 'H6', style: 'header-six' }
-];
+]
 
-export default HEADER_TYPES;
+export default HEADER_TYPES

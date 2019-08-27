@@ -2,8 +2,8 @@ import Axios from 'axios'
 
 export default e =>
   new Promise((resolve, reject) => {
-    const baseUrl = 'https://api.cloudinary.com/v1_1/dkqqm2qwn/upload'
-    const basePreset = 'n9dlfrxu'
+    const baseUrl = process.env.CLOUDINARYAPI
+    const basePreset = process.env.CLOUDINARYPRESET
     const imageFile = e.target.files[0]
     // eslint-disable-next-line no-undef
     const formData = new FormData()

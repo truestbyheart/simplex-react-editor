@@ -1,0 +1,133 @@
+@charset "UTF-8";
+.DraftEditor-root {
+  min-height: 200px;
+}
+
+.DraftEditor-editorContainer {
+  margin: 10px 10px 0 10px;
+}
+
+.DraftEditor-editorContainer .public-DraftEditor-content figure {
+  border: #000;
+  background-color: #eee;
+  width: 65%;
+}
+
+.DraftEditor-editorContainer .public-DraftEditor-content figure .captioned-image {
+  left: 50%;
+}
+
+.DraftEditor-editorContainer .public-DraftEditor-content figure .captioned-image img {
+  display: block;
+  padding: 10px;
+  width: 100%;
+}
+
+.DraftEditor-editorContainer .public-DraftEditor-content figure .captioned-image input {
+  border: none;
+  display: block;
+  background-color: #eee;
+  margin-left: 38%;
+}
+
+.DraftEditor-editorContainer .public-DraftEditor-content figure:hover {
+  outline: 4px solid #c3ffb7;
+}
+
+.DraftEditor-editorContainer .public-DraftEditor-content pre {
+  background-color: rgba(0, 0, 0, 0.05);
+  font-family: "Inconsolata", "Menlo", "Consolas", monospace;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.DraftEditor-editorContainer .public-DraftEditor-content h1 {
+  font-weight: 600;
+  text-align: center;
+}
+
+.editor {
+  position: relative;
+  border: 1px solid #ced4da;
+}
+
+.editor__toolbar {
+  height: 70px;
+  width: 100%;
+  border-bottom: 1px solid #ced4da;
+}
+
+.editor__toolbar ul {
+  width: 250px;
+  position: absolute;
+  margin: 2% 0 0 12%;
+  list-style: none;
+}
+
+.editor__toolbar ul li {
+  display: inline-block;
+  cursor: pointer;
+}
+
+.editor__toolbar ul li:not(:first-child) {
+  margin-left: 12%;
+}
+
+.editor__toolbar ul li:hover i {
+  color: #ced4da;
+}
+
+.editor__toolbar ul button {
+  border: none;
+  background-color: #ffffff;
+  outline: none;
+}
+
+.editor__toolbar--ordering {
+  left: 20%;
+}
+
+.editor__toolbar--alignment {
+  left: 43%;
+}
+
+.editor__toolbar--img {
+  left: 65%;
+}
+
+.editor__toolbar--img input[type="file"].file-uploader {
+  display: none;
+  cursor: pointer;
+}
+
+.editor__toolbar--img li {
+  width: 26.1px;
+  height: 26.1px;
+  z-index: -1;
+  cursor: pointer;
+}
+
+.input-group {
+  width: 13%;
+  margin-top: 1.5% !important;
+  margin-left: 1% !important;
+  position: absolute;
+}
+
+.RichEditor-blockquote {
+  background: #f9f9f9;
+  border-left: 10px solid #ccc;
+  margin: 1.5em 10px;
+  padding: 0.5em 10px;
+  quotes: "“" "”" "‘" "’";
+}
+
+.RichEditor-blockquote::before {
+  color: #ccc;
+  content: open-quote;
+  font-size: 4em;
+  line-height: 0.1em;
+  margin-right: 0.25em;
+  vertical-align: -0.4em;
+}
+/*# sourceMappingURL=index.css.map */

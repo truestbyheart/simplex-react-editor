@@ -24,6 +24,6 @@ const ORDERING = [
     icon: 'fas fa-quote-left'
   }
 
-];
+]
 
-export default ORDERING;
+export default ORDERING

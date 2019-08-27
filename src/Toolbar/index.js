@@ -5,6 +5,7 @@ import ListOrder from './Partials/listOrdering'
 import TextSyling from './Partials/textStyler'
 import Image from './Partials/imageUpload'
 import Alignment from './Partials/alignment'
+import propTypes from 'prop-types'
 
 export function getBlockStyle(block) {
   switch (block.getType()) {
@@ -54,4 +55,11 @@ class index extends Component {
   }
 }
 
+index.propTypes = {
+  editorState: propTypes.object.isRequired,
+  onToggle: propTypes.func.isRequired,
+  updateState: propTypes.func.isRequired,
+  imageUploader: propTypes.func.isRequired
+
+}
 export default index
