@@ -1,6 +1,6 @@
 {
   "name": "simple-react-editor",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "a simple stackoverflow inspired editor.",
   "author": "truestbyheart",
   "license": "MIT",
@@ -30,7 +30,8 @@
     "prop-types": "^15.5.4",
     "react": "^15.0.0 || ^16.0.0",
     "react-dom": "^15.0.0 || ^16.0.0",
-    "draft-js-code": "^0.3.0"
+    "draft-js-code": "^0.3.0",
+    "html-to-draftjs": "^1.4.0"
   },
   "devDependencies": {
     "@svgr/rollup": "^2.4.1",

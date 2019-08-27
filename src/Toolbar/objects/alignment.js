@@ -23,6 +23,6 @@ const ALIGNMENT = [
     style: 'justify',
     icon: 'fas fa-align-justify'
   }
-];
+]
 
-export default ALIGNMENT;
+export default ALIGNMENT

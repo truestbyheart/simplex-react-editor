@@ -1,33 +1,32 @@
-import React from 'react';
+import React from 'react'
 
-const Image = ({ src }) => {
-  if (src) {
-    return <img src={src} alt="jpg" />;
-  }
-  return null;
-};
+// eslint-disable-next-line react/prop-types
+export const findImageEntities = (contentBlock, callback, contentState) => {
+  contentBlock.findEntityRanges(
+    (character) => {
+      const entityKey = character.getEntity()
+      return (
+        entityKey !== null &&
+        contentState.getEntity(entityKey).getType() === 'IMAGE'
+      )
+    },
+    callback
+  )
+}
+export const UpdateImage = (props) => {
+  const { src } = props.contentState.getEntity(props.entityKey).getData()
+  return (
+    <img src={src} />
+  )
+}
 
-const Media = (props) => {
-  const entity = props.contentState.getEntity(props.block.getEntityAt(0));
-  const { src } = entity.getData();
-  const type = entity.getType();
-
-  let media;
-
-  if (type === 'image') {
-    media = <Image src={src} />;
-  }
-
-  return media;
-};
-
-export default (block) => {
-  if (block.getType() === 'atomic') {
+export default block => {
+  if (block.getType() === 'IMAGE') {
     return {
-      component: Media,
+      component: UpdateImage,
       editable: false
-    };
+    }
   }
 
-  return null;
-};
+  return null
+}

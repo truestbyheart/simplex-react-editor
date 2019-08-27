@@ -1,21 +1,35 @@
 import React from 'react'
-import Draft, { EditorState, RichUtils, AtomicBlockUtils } from 'draft-js'
-import Editor from 'draft-js-plugins-editor'
+import Draft, { EditorState, RichUtils, AtomicBlockUtils, ContentState, CompositeDecorator, convertFromHTML, Editor } from 'draft-js'
 import { stateToHTML } from 'draft-js-export-html'
 import CodeUtils from 'draft-js-code'
-import PropTypes from 'prop-types'
-import mediaBlockRenderer from './Entity/mediaBlockEntity'
+import propTypes from 'prop-types'
+import mediaBlockRenderer, { findImageEntities, UpdateImage } from './Entity/mediaBlockEntity'
 import Toolbar from './Toolbar'
 import imageUpload from './Image-upload/image-upload'
 import './styles.css'
 
 class SimplexEditor extends React.Component {
-  static PropTypes ={
-    getArticle: PropTypes.func.isRequired
-  }
   constructor(props) {
-    super(props)
-    this.state = { editorState: EditorState.createEmpty() }
+    super()
+    this.state = {
+      editorState: null
+    }
+    const decorator = new CompositeDecorator([
+      {
+        strategy: findImageEntities,
+        component: UpdateImage
+      }
+    ])
+    const { content } = props
+    if (content) {
+      const blockFromHtml = convertFromHTML(content)
+      const { contentBlocks, entintyMap } = blockFromHtml
+      const contentState = ContentState.createFromBlockArray(contentBlocks, entintyMap)
+      const initialContent = EditorState.createWithContent(contentState, decorator)
+      this.state = { editorState: initialContent }
+    } else {
+      this.state = { editorState: EditorState.createEmpty() }
+    }
   }
 
   onChange = editorState => {
@@ -37,13 +51,15 @@ class SimplexEditor extends React.Component {
     return 'not-handled'
   };
 
+  focus = () => this.refs.editor.focus();
+
   onURLChange = e => this.setState({ urlValue: e.target.value });
 
   onAddImage = imageUrl => {
     const { editorState } = this.state
     const contentState = editorState.getCurrentContent()
     const contentStateWithEntity = contentState.createEntity(
-      'image',
+      'IMAGE',
       'IMMUTABLE',
       { src: imageUrl }
     )
@@ -157,7 +173,6 @@ class SimplexEditor extends React.Component {
   };
 
   render() {
-    console.log(this.props)
     const { editorState } = this.state
     return (
       <div>
@@ -186,6 +201,11 @@ class SimplexEditor extends React.Component {
       </div>
     )
   }
+}
+
+SimplexEditor.propTypes = {
+  getArticle: propTypes.func.isRequired,
+  content: propTypes.string
 }
 
 export default SimplexEditor
