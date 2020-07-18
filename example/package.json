@@ -10,7 +10,7 @@
     "draft-js-code": "^0.3.0",
     "draft-js-export-html": "^1.4.1",
     "draft-js-plugins-editor": "^2.1.1",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "prop-types": "^15.6.2",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
